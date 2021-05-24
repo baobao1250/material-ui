@@ -8,7 +8,7 @@ import { blue } from '@material-ui/core/colors';
 import CBox from '../CheckBox';
 import Input from '@material-ui/core/Input';
 
-
+const emails = ['username@gmail.com', 'user02@gmail.com'];
 const useStyles = makeStyles((theme) => ({
     avatar: {
         backgroundColor: blue[100],
