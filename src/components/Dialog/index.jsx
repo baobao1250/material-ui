@@ -8,7 +8,6 @@ import { blue } from '@material-ui/core/colors';
 import CBox from '../CheckBox';
 import Input from '@material-ui/core/Input';
 
-const emails = ['username@gmail.com', 'user02@gmail.com'];
 const useStyles = makeStyles((theme) => ({
     avatar: {
         backgroundColor: blue[100],
@@ -87,7 +86,7 @@ const useSty = makeStyles((theme) => ({
 function SimpleDialogDemo(props) {
     const classes = useSty();
     const [open, setOpen] = React.useState(false);
-    const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -95,7 +94,7 @@ function SimpleDialogDemo(props) {
 
     const handleClose = (value) => {
         setOpen(false);
-        setSelectedValue(value);
+
     };
 
     return (
@@ -107,7 +106,7 @@ function SimpleDialogDemo(props) {
                 Thêm
             </Button>
 
-            <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
+            <SimpleDialog open={open} onClose={handleClose} />
         </div>
     );
 }

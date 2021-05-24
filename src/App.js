@@ -45,7 +45,7 @@ function App() {
     <div className="App">
       <SearchList onSubmit={handleFiltersChange} />
       <CBox />
-      <Dialog/>
+      <Dialog />
       <TodoList todos={todolist} onTodoClick={handleTodoClick} />
 
     </div>

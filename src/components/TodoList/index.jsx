@@ -35,15 +35,6 @@ const columns = [
     },
 ];
 
-// function createData(id, name, active, quyen) {
-//     return { id, name, active, quyen };
-// }
-
-// const rows = [
-//     createData('1', 'Cơ sở sản xuât', <CheckOutlinedIcon />, <CreateOutlinedIcon />),
-//     createData('2', 'Cơ sở kinh doanh', <CheckOutlinedIcon />, <CreateOutlinedIcon />),
-//     createData('3', 'Cơ sở vừa sản xuât vừa kinh doanh', <CheckOutlinedIcon />, <CreateOutlinedIcon />),
-// ];
 
 const useStyles = makeStyles({
     root: {
