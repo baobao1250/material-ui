@@ -1,13 +1,13 @@
-
 import './App.css';
 import SearchList from './components/SearchList';
 import { useEffect, useState } from 'react';
 import TodoList from './components/TodoList';
-import Dialog from './components/Dialog';
 import React from 'react';
 import CBox from './components/CheckBox';
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
+import { Dialog } from '@material-ui/core';
+import { SignalCellular0Bar } from '@material-ui/icons';
 
 
 function App() {
@@ -33,7 +33,16 @@ function App() {
 
   };
 
-
+  //Add list
+  function handleSubmit(FValues) {
+    const newtodo = {
+      id: todoList.length + 1,
+      ...FValues,
+    };
+    const newTodoList = [...todoList]
+    newTodoList.push(newtodo);
+    setTodoList(newTodoList);
+  }
 
   //list
   function handleTodoClick(todo) {
@@ -43,9 +52,9 @@ function App() {
 
   return (
     <div className="App">
+      <h2>Danh mục loại hình cơ sở</h2>
       <SearchList onSubmit={handleFiltersChange} />
       <CBox />
-      <Dialog />
       <TodoList todos={todolist} onTodoClick={handleTodoClick} />
 
     </div>

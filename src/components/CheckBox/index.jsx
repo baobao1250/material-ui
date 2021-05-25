@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+
 
 function CBox(props) {
     const [checked, setChecked] = useState(true);
 
     const handleChange = (event) => {
         setChecked(event.target.checked);
-    }
+    };
+
     return (
         <div>
-            <Checkbox
-                checked={checked}
-                onChange={handleChange}
-                inputProps={{ 'aria-label': 'primary checkbox' }}
+            <FormControlLabel
+                control={<Checkbox checked={checked} onChange={handleChange} />}
+                label="Hoạt động"
             />
-            <label>Hoạt động</label>
         </div>
     );
 }
