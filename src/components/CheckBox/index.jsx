@@ -7,6 +7,7 @@ function CBox(props) {
     const [checked, setChecked] = useState(true);
 
     const handleChange = (event) => {
+        console.log(event.target.checked)
         setChecked(event.target.checked);
     };
 

@@ -14,6 +14,7 @@ import { Maximize } from '@material-ui/icons';
 import InputLabel from '@material-ui/core/InputLabel';
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
+import { Checkbox } from '@material-ui/core';
 
 
 
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
     TextField: {
         marginLeft: 0,
+        width: '80%',
     },
     avatar: {
         backgroundColor: blue[100],
@@ -49,25 +51,35 @@ const useStyles = makeStyles((theme) => ({
 SimpleDialog.propTypes = {
     onClose: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
-    onSubmit: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
 };
 
 function SimpleDialog(props) {
     const classes = useStyles();
-    const { onClose, open, onSubmit } = props;
+    const { onClose, open, handleSubmit, checker } = props;
     const [value, setValue] = React.useState('');
+    const [value2, setValue2] = useState('');
 
-    function handleSubmit(e) {
+    function handleSubmitDialog(e) {
         e.preventDefault();
-        if (!onSubmit) return;
+        if (!props.handleSubmit) return;
 
         const FValues = {
             name: value,
-            active: <CheckOutlinedIcon />,
+            description: value2,
+            active: checker ? <CheckOutlinedIcon /> : " ",
             quyen: <CreateOutlinedIcon />,
 
         };
-        onSubmit(FValues);
+        handleSubmit(FValues);
+
+        setValue('');
+        setValue2('');
+    }
+
+    function handleDelete(e) {
+        setValue(" ");
+        setValue2(" ");
     }
 
 
@@ -80,6 +92,12 @@ function SimpleDialog(props) {
         setValue(event.target.value);
         console.log(event.target.value);
     };
+
+    const handleChange2 = (event) => {
+        setValue2(event.target.value);
+        console.log(event.target.value);
+    };
+
 
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
@@ -99,16 +117,18 @@ function SimpleDialog(props) {
                     </label>
                 <br />
                 <TextField
+                    onChange={handleChange2}
+                    value={value2}
                     id="outlined-multiline-static"
                     multiline
                     rows={4}
                     variant="outlined"
                 />
-                <CBox />
-                <Button onClick={handleSubmit} variant="contained" >
+                <CBox checker={checker} />
+                <Button onClick={handleSubmitDialog} variant="contained" >
                     Lưu
                     </Button>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" onClick={handleDelete}>
                     Xóa
                     </Button>
                 <Button variant="contained" color="secondary" onClick={handleClose}>
@@ -160,7 +180,7 @@ function SearchList(props) {
                 <Grid item xs={12}>
                     <InputLabel>Từ khóa: </InputLabel>
                     <br />
-                    <Input className={classes.TextField} fullWidth type="text" value={values} onChange={handleValuesOnChange} />
+                    <Input className={classes.TextField} type="text" value={values} onChange={handleValuesOnChange} />
                 </Grid>
                 <Grid item xs={9}>
                     <Button className={classes.Button} variant="contained" color="primary" >
@@ -170,7 +190,8 @@ function SearchList(props) {
                         Thêm
                     </Button>
                 </Grid>
-                <SimpleDialog open={open} onClose={handleClose} />
+
+                <SimpleDialog open={open} onClose={handleClose} handleSubmit={props.handleSubmit} />
             </Grid>
         </form>
     );
